@@ -4,7 +4,7 @@ WORKDIR /src
 
 # Copia apenas o arquivo de projeto para restaurar as dependências
 # O projeto se chama 'origamidex-api.csproj' dentro da pasta 'origamidex-api'
-COPY ["origamidex-api/origamidex-api.csproj", "origamidex-api/"]
+COPY ["Origamix.Api/Origamix.Api/origamidex-api.csproj", "origamidex-api/"]
 RUN dotnet restore "origamidex-api/origamidex-api.csproj"
 
 # Copia o restante dos arquivos e compila
