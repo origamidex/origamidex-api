@@ -2,12 +2,17 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Copia apenas o arquivo de projeto para restaurar as dependências
+# Copia a solução e o projeto
+COPY ["Origamix.Api.sln", "./"]
 COPY ["Origamix.Api/Origamix.Api.csproj", "Origamix.Api/"]
-RUN dotnet restore "Origamix.Api/Origamix.Api.csproj"
 
-# Copia o restante dos arquivos e compila
+# Restaura as dependências
+RUN dotnet restore
+
+# Copia o restante dos arquivos
 COPY . .
+
+# Entra na pasta do projeto para o build
 WORKDIR "/src/Origamix.Api"
 RUN dotnet build "Origamix.Api.csproj" -c Release -o /app/build
 
